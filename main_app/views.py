@@ -15,7 +15,14 @@ class Finch:
     self.bio = bio
 
 finches = [
-  Finch("Bird", "Bird stuff"),
+  Finch("Bird1", "Bird stuff"),
+  Finch("Bird2", "Bird stuff"),
+  Finch("Bird3", "Bird stuff"),
+  Finch("Bird4", "Bird stuff"),
+  Finch("Bird5", "Bird stuff"),
+  Finch("Bird6", "Bird stuff"),
+  Finch("Bird7", "Bird stuff"),
+  Finch("Bird8", "Bird stuff"),
 ]
 
 # Here we will be creating a class called Home and extending it from the View class

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+# local host 8000
+
 # this like app.use() in express
 urlpatterns = [
   path('', views.Home.as_view(), name="home"),
