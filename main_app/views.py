@@ -9,6 +9,13 @@ from django.http import HttpResponse
 
 # import models
 from .models import Finch
+
+from django.views.generic.detail import DetailView
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from django.urls import reverse
+
 # Create your views here
 
 # # adds artist class for mock database data
@@ -57,8 +64,42 @@ class FinchList(TemplateView):
         name = self.request.GET.get("name")
         # If a query exists we will filter by name 
         if name != None:
-            # .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
             context["finches"] = Finch.objects.filter(name__icontains=name)
+            # We add a header context that includes the search param
+            context["header"] = f"Searching for {name}"
         else:
             context["finches"] = Finch.objects.all()
+            # default header for not searching 
+            context["header"] = "Trending Artists"
         return context
+
+
+
+
+class FinchCreate(CreateView):
+    model = Finch
+    fields = ['name', 'img', 'bio', 'verified_finch']
+    template_name = "finch_create.html"
+    # this will get the pk from the route and redirect to finch view
+    def get_success_url(self):
+        return reverse('finch_detail', kwargs={'pk': self.object.pk})
+
+    
+class FinchDetail(DetailView):
+    model = Finch
+    template_name = "finch_detail.html"
+
+
+class FinchUpdate(UpdateView):
+    model = Finch
+    fields = ['name', 'img', 'bio', 'verified_finch']
+    template_name = "finch_update.html"
+
+    def get_success_url(self):
+        return reverse('finch_detail', kwargs={'pk': self.object.pk})
+
+
+class FinchDelete(DeleteView):
+    model = Finch
+    template_name = "finch_delete_confirmation.html"
+    success_url = "/finches/"
