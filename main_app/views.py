@@ -6,24 +6,27 @@ from django.views.generic.base import TemplateView
 
 # A class to handle sending a type of request
 from django.http import HttpResponse
-# Create your views here.
 
-# adds artist class for mock database data
-class Finch:
-  def __init__(self, name, bio):
-    self.name = name
-    self.bio = bio
+# import models
+from .models import Finch
+# Create your views here
 
-finches = [
-  Finch("Bird1", "Bird stuff"),
-  Finch("Bird2", "Bird stuff"),
-  Finch("Bird3", "Bird stuff"),
-  Finch("Bird4", "Bird stuff"),
-  Finch("Bird5", "Bird stuff"),
-  Finch("Bird6", "Bird stuff"),
-  Finch("Bird7", "Bird stuff"),
-  Finch("Bird8", "Bird stuff"),
-]
+# # adds artist class for mock database data
+# class Finch:
+#   def __init__(self, name, bio):
+#     self.name = name
+#     self.bio = bio
+
+# finches = [
+#   Finch("Bird1", "Bird stuff"),
+#   Finch("Bird2", "Bird stuff"),
+#   Finch("Bird3", "Bird stuff"),
+#   Finch("Bird4", "Bird stuff"),
+#   Finch("Bird5", "Bird stuff"),
+#   Finch("Bird6", "Bird stuff"),
+#   Finch("Bird7", "Bird stuff"),
+#   Finch("Bird8", "Bird stuff"),
+# ]
 
 # Here we will be creating a class called Home and extending it from the View class
 class Home(TemplateView):
@@ -50,5 +53,5 @@ class FinchList(TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    context["finches"] = finches # this is where we add the key into our context object for the view to use
+    context["finches"] = Finch.objects.all() # this is where we add the key into our context object for the view to use
     return context
