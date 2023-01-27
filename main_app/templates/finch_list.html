@@ -25,6 +25,11 @@
   {% for finch in finches %}
   <a href="">
     <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{finch.img}}" alt="{{finch.name}}" />
+        </figure>
+      </div>
       <div class="card-header">
         <p class="card-header-title">{{finch.name}}</p>
         <p class="card-header-title">{{finch.bio}}</p>
